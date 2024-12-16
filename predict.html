@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyze Telegram Message</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 3rem;
+        }
+        header p {
+            font-size: 1.2rem;
+        }
+        .container {
+            padding: 50px;
+            text-align: center;
+            background-color: #fff;
+            margin: 50px auto;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        }
+        .container textarea {
+            width: 100%;
+            height: 120px;
+            padding: 15px;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+        .container button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        .container button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.5rem;
+        }
+        .suspicious {
+            color: red;
+        }
+        .not-suspicious {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Telegram Scam Detection Bot</h1>
+        <p>Analyze messages to detect potential scams or suspicious content.</p>
+    </header>
+
+    <div class="container">
+        <h2>Analyze a Telegram Message</h2>
+        <form action="/predict" method="POST">
+            <textarea name="message" placeholder="Type your message here..." required></textarea><br>
+            <button type="submit">Check for Scam</button>
+        </form>
+
+        {% if message %}
+            <div class="result {% if result == 'Suspicious' %}suspicious{% else %}not-suspicious{% endif %}">
+                <p><strong>Message:</strong> {{ message }}</p>
+                <p><strong>Result:</strong> {{ result }}</p>
+            </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>

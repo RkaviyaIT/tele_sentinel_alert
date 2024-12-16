@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Scam Detection Bot</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 3rem;
+            font-weight: 600;
+        }
+        header p {
+            font-size: 1.2rem;
+        }
+
+        /* Container Styles */
+        .container {
+            background-color: white;
+            padding: 40px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            max-width: 700px;
+            margin: 50px auto;
+            text-align: center;
+        }
+        .container h2 {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        /* Textarea Styles */
+        textarea {
+            width: 100%;
+            height: 120px;
+            padding: 15px;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            resize: none;
+        }
+        textarea:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        /* Button Styles */
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Loader Styles */
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4CAF50;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+            margin-top: 20px;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Result Styles */
+        .result {
+            margin-top: 30px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .result.suspicious {
+            color: red;
+        }
+
+        .result.not-suspicious {
+            color: green;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        /* Responsive Layout */
+        @media screen and (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            header h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Telegram Scam Detection Bot</h1>
+        <p>Analyze messages from Telegram channels to detect suspicious or scam activities.</p>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <h2>Analyze a Message</h2>
+
+        <!-- Form for message submission -->
+        <form action="/predict" method="POST" id="prediction-form">
+            <textarea name="message" id="message" placeholder="Type your message here..." required></textarea><br>
+            <button type="submit" id="submit-button">Check for Scam</button>
+        </form>
+
+        <!-- Loader (hidden initially) -->
+        <div id="loader" class="loader"></div>
+
+        <!-- Result Display Section -->
+        {% if message %}
+            <div class="result {% if result == 'Suspicious' %}suspicious{% else %}not-suspicious{% endif %}">
+                <p><strong>Message:</strong> {{ message }}</p>
+                <p><strong>Result:</strong> {{ result }}</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="container">
+        <h2>To Check more details On Spam Messages Follow The instructions ! </h2>
+        <ol>
+            <li><b>Go to the telegram:</b>Click the search option</li>
+            <li><b>Go to Bot:</b>TelegramScamAlertBot</li>
+            <li><b>Follow the Commands and Check the scams!!!</b></li>
+        </ol>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Telegram Scam Detection. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Show loader when form is submitted
+        const form = document.getElementById('prediction-form');
+        const loader = document.getElementById('loader');
+        const submitButton = document.getElementById('submit-button');
+
+        form.onsubmit = function () {
+            loader.style.display = 'block';  // Show loader
+            submitButton.disabled = true;   // Disable the button during processing
+        };
+    </script>
+
+</body>
+</html>
